@@ -3,14 +3,14 @@ FROM cm2network/steamcmd:root
 #RUN: mkdir data; docker run -p 15000:15000/udp -p 7777:7777/udp -p 15777:15777/udp -d --name=satisfactory -v $(pwd)/data:/home/steam/Satisfactory-dedicated satisfactory
 
 RUN apt-get update && apt-get install -y libcurl4 libcurl4-openssl-dev && \
-    ln -s /usr/lib/x86_64-linux-gnu/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so && \
+    ln -sf /usr/lib/x86_64-linux-gnu/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so && \
     rm -rf /var/lib/apt/lists/*
 
 ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libcurl.so.4
 
-ENV STEAMAPPID 1690800
-ENV STEAMAPP Satisfactory
-ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV STEAMAPPID=1690800
+ENV STEAMAPP=Satisfactory
+ENV STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-dedicated"
 RUN echo "export LD_LIBRARY_PATH=${STEAMAPPDIR}/linux64:$LD_LIBRARY_PATH\n\
 bash ${STEAMCMDDIR}/steamcmd.sh +login anonymous +force_install_dir ${STEAMAPPDIR} +app_update ${STEAMAPPID} validate +quit\n\
 test -d ~/.config/Epic/FactoryGame/Saved || mkdir -p ~/.config/Epic/FactoryGame/Saved\n\
