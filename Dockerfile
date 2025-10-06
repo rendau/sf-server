@@ -2,7 +2,11 @@ FROM cm2network/steamcmd:root
 #BUILD: docker build -t satisfactory .
 #RUN: mkdir data; docker run -p 15000:15000/udp -p 7777:7777/udp -p 15777:15777/udp -d --name=satisfactory -v $(pwd)/data:/home/steam/Satisfactory-dedicated satisfactory
 
-RUN apt-get update && apt-get install -y libcurl4 libcurl4-openssl-dev && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libcurl4 libcurl4-openssl-dev && \
+    ln -s /usr/lib/x86_64-linux-gnu/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libcurl.so.4
 
 ENV STEAMAPPID 1690800
 ENV STEAMAPP Satisfactory
