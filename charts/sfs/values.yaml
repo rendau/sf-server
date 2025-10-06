@@ -1,0 +1,10 @@
+app:
+  image: wolveix/satisfactory-server:latest
+  env:
+    TZ: "Asia/Aqtau"
+    DEBUG: "false"
+    MAXPLAYERS: "4"
+    SKIPUPDATE: "false"
+    STEAMBETA: "false"
+    PGID: "1000"
+    PUID: "1000"

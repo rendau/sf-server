@@ -1,0 +1,7 @@
+releases:
+  - name: sfs
+    chart: charts/sfs
+    namespace: default
+    installed: true
+    labels:
+      rel: sfs
