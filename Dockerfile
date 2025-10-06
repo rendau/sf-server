@@ -1,7 +1,7 @@
 FROM cm2network/steamcmd:root
 #BUILD: docker build -t satisfactory .
 #RUN: mkdir data; docker run -p 15000:15000/udp -p 7777:7777/udp -p 15777:15777/udp -d --name=satisfactory -v $(pwd)/data:/home/steam/Satisfactory-dedicated satisfactory
-RUN apt-get install libcurl3
+RUN apt-get install libcurl3-gnutls
 ENV STEAMAPPID 1690800
 ENV STEAMAPP Satisfactory
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
