@@ -2,45 +2,37 @@
 
 .SILENT:
 use_ctx:
-	kubectl config use-context sfs
+	kubectl config use-context qoqoh
 
 .SILENT:
-install:
-	kubectl config use-context sfs
+install: use_ctx
 	helmfile apply
 
 .SILENT:
-ins:
-	kubectl config use-context sfs
+ins: use_ctx
 	helmfile apply -q -l rel=$(r)
 
 .SILENT:
-uninstall:
-	kubectl config use-context sfs
+uninstall: use_ctx
 	helmfile destroy
 
 .SILENT:
-uninst:
-	kubectl config use-context sfs
+uninst: use_ctx
 	helmfile destroy -l rel=$(r)
 
 .SILENT:
-prune_pods:
-	kubectl config use-context sfs
+prune_pods: use_ctx
 	kubectl delete pod --field-selector=status.phase=Succeeded --all-namespaces
 	kubectl delete pod --field-selector=status.phase=Failed --all-namespaces
 
 .SILENT:
-rd:
-	kubectl config use-context sfs
+rd: use_ctx
 	kubectl rollout restart deploy $(n)
 
 .SILENT:
-rds:
-	kubectl config use-context sfs
+rds: use_ctx
 	kubectl rollout restart daemonset $(n)
 
 .SILENT:
-rss:
-	kubectl config use-context sfs
+rss: use_ctx
 	kubectl rollout restart statefulset $(n)
